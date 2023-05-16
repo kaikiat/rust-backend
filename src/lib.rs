@@ -27,6 +27,7 @@ pub mod http;
 
 // use settings::Settings;
 // use log::Level;
+// use http::api;
 
 pub fn init() {
     println!("Initing");
