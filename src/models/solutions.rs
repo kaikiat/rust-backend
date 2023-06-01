@@ -1,16 +1,6 @@
 use crate::config::DATE_FORMAT;
-// use diesel::helper_types::Nullable;
-use serde::{Serialize};
+use serde::Serialize;
 use chrono::NaiveDateTime;
-// use chrono::{DateTime, Utc, NaiveDateTime};
-
-
-// id -> Int4,
-// title -> Varchar,
-// description -> Nullable<Varchar>,
-// code -> Varchar,
-// created_on -> Timestamp,
-// modified_on -> Nullable<Timestamp>,
 
 #[derive(Queryable)]
 pub struct Solution {

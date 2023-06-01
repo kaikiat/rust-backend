@@ -1,12 +1,9 @@
 use crate::models::solutions::{Solution, SolutionJson};
 use crate::schema::solutions;
-// use chrono::{DateTime, Utc};
 use diesel;
 use diesel::pg::PgConnection;
 use diesel::prelude::*;
 
-// const SUFFIX_LEN: usize = 6;
-// const DEFAULT_LIMIT: i64 = 20;
 
 // #[derive(Insertable)]
 // #[table_name="solutions"]
@@ -19,17 +16,7 @@ use diesel::prelude::*;
 //     pub modified_on:  Option<DateTime<Utc>>,
 // }
 
-// pub fn find(conn: &PgConnection) -> Vec<SolutionJson> {
-// pub fn find(conn: &PgConnection) {
 pub fn find(conn: &mut PgConnection) -> Vec<SolutionJson> {
-    // let result = solutions::table
-    //     .get_results::<Solution>(conn)
-    //     .expect("Cannot load solutions");
-    // let result = solutions::table::<Solution>(conn)?;
-
-    // let result = solutions::table
-    // .load::<Solution>(&conn)
-    // .expect("Failed to fetch solutions");
 
     let result = solutions::table
         .load::<Solution>(conn)
