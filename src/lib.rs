@@ -7,6 +7,8 @@ use rocket::serde::json::{json, Value};
 #[macro_use]
 extern crate rocket_sync_db_pools;
 
+extern crate chrono;
+
 extern crate rocket_cors;
 use rocket_cors::{Cors, CorsOptions};
 
@@ -46,29 +48,9 @@ pub fn rocket() -> _ {
         .mount(
             "/api",
             routes![
-                routes::users::post_users,
-                routes::users::post_users_login,
-                routes::users::put_user,
-                routes::users::get_user,
-                routes::articles::post_articles,
-                routes::articles::put_articles,
-                routes::articles::get_article,
-                routes::articles::delete_article,
-                routes::articles::favorite_article,
-                routes::articles::unfavorite_article,
-                routes::articles::get_articles,
-                routes::articles::get_articles_feed,
-                routes::articles::post_comment,
-                routes::articles::get_comments,
-                routes::articles::delete_comment,
-                routes::tags::get_tags,
-                routes::profiles::get_profile,
-                routes::profiles::follow,
-                routes::profiles::unfollow,
+                routes::solutions::get_solutions,
             ],
         )
         .attach(database::Db::fairing())
-        .attach(cors_fairing())
-        .attach(config::AppState::manage())
         .register("/", catchers![not_found])
 }
