@@ -20,6 +20,10 @@ rand = "0.8.4"
 dotenv = "0.15.0"
 jsonwebtoken = "8.3.0"
 
+[dependencies.rocket]
+version = "0.4.11"
+features = ["json"]
+
 [dependencies.rocket_sync_db_pools]
 version = "0.1.0-rc.1"
 default-features = false
