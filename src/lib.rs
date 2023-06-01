@@ -57,6 +57,7 @@ impl Fairing for Cors {
     }
 }
 
+// routes::healthz::get_healthz,
 
 #[launch]
 pub fn rocket() -> _ {
@@ -66,6 +67,12 @@ pub fn rocket() -> _ {
             "/api",
             routes![
                 routes::solutions::get_solutions,
+            ],
+        )
+        .mount(
+            "/",
+            routes![
+                routes::healthz::get_healthz,
             ],
         )
         .attach(database::Db::fairing())
