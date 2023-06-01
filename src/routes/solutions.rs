@@ -47,7 +47,8 @@ pub async fn get_solutions(db: Db) -> Value {
     let solutions = db
         .run(move |conn| database::solutions::find(conn))
         .await;
-    json!({ "articles": solutions.0, "articlesCount": solutions.1 })
+    println!("Solutions : {:?}",solutions);
+    json!({ "solutions": vec![1,2,3]})
 }
 
 

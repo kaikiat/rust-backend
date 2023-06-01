@@ -5,7 +5,7 @@ use std::env;
 
 pub const DATE_FORMAT: &'static str = "%Y-%m-%dT%H:%M:%S%.3fZ";
 
-pub const TOKEN_PREFIX: &'static str = "Token ";
+// pub const TOKEN_PREFIX: &'static str = "Token ";
 
 /// Create rocket config from environment variables
 pub fn from_env() -> Figment {

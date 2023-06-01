@@ -1,92 +1,44 @@
-// use crate::database::OffsetLimit;
-use crate::models::solutions::{SolutionJson};
-// use crate::schema::solutions;
-use chrono::{DateTime, Utc};
+use crate::models::solutions::{Solution, SolutionJson};
+use crate::schema::solutions;
+// use chrono::{DateTime, Utc};
 use diesel;
 use diesel::pg::PgConnection;
 use diesel::prelude::*;
 
-const SUFFIX_LEN: usize = 6;
-const DEFAULT_LIMIT: i64 = 20;
+// const SUFFIX_LEN: usize = 6;
+// const DEFAULT_LIMIT: i64 = 20;
 
-#[derive(Insertable)]
-#[table_name="solutions"]
-pub struct NewSolutions {
-    pub id: i32,
-    pub title: String,
-    pub description: Option<String>,
-    pub code: String,
-    pub body: String,
-    pub created_on: DateTime<Utc>,
-    pub modified_on: DateTime<Utc>,
-}
+// #[derive(Insertable)]
+// #[table_name="solutions"]
+// pub struct NewSolutions {
+//     pub id: i32,
+//     pub title: String,
+//     pub description: Option<String>,
+//     pub code: String,
+//     pub created_on: DateTime<Utc>,
+//     pub modified_on:  Option<DateTime<Utc>>,
+// }
 
-#[derive(FromForm, Default)]
-pub struct FindArticles {
-    pub tag: Option<String>,
-    pub author: Option<String>,
-    /// favorited by user
-    pub favorited: Option<String>,
-    pub limit: Option<i64>,
-    pub offset: Option<i64>,
-}
+// pub fn find(conn: &PgConnection) -> Vec<SolutionJson> {
+// pub fn find(conn: &PgConnection) {
+pub fn find(conn: &mut PgConnection) -> Vec<SolutionJson> {
+    // let result = solutions::table
+    //     .get_results::<Solution>(conn)
+    //     .expect("Cannot load solutions");
+    // let result = solutions::table::<Solution>(conn)?;
 
-pub fn find(
-    conn: &PgConnection,
-) -> (Vec<SolutionJson>, i64) {
-    let mut query = solutions::table
-        .inner_join(solutions::table)
-        .left_join(
-            favorites::table.on(articles::id
-                .eq(favorites::article)
-                .and(favorites::user.eq(user_id.unwrap_or(0)))), // TODO: refactor
-        )
-        .select((
-            articles::all_columns,
-            users::all_columns,
-            favorites::user.nullable().is_not_null(),
-        ))
-        .into_boxed();
-    if let Some(ref author) = params.author {
-        query = query.filter(users::username.eq(author))
-    }
-    if let Some(ref tag) = params.tag {
-        query = query.or_filter(articles::tag_list.contains(vec![tag]))
-    }
-    if let Some(ref favorited) = params.favorited {
-        let result = users::table
-            .select(users::id)
-            .filter(users::username.eq(favorited))
-            .get_result::<i32>(conn);
-        match result {
-            Ok(id) => {
-                query = query.filter(diesel::dsl::sql(&format!(
-                    "articles.id IN (SELECT favorites.article FROM favorites WHERE favorites.user = {})",
-                    id
-                )));
-            }
-            Err(err) => match err {
-                diesel::result::Error::NotFound => return (vec![], 0),
-                _ => panic!("Cannot load favorited user: {}", err),
-            },
-        }
-    }
+    // let result = solutions::table
+    // .load::<Solution>(&conn)
+    // .expect("Failed to fetch solutions");
 
-    query
-        .offset_and_limit(
-            params.offset.unwrap_or(0),
-            params.limit.unwrap_or(DEFAULT_LIMIT),
-        )
-        .load_and_count::<(Article, User, bool)>(conn)
-        .map(|(res, count)| {
-            (
-                res.into_iter()
-                    .map(|(article, author, favorited)| article.attach(author, favorited))
-                    .collect(),
-                count,
-            )
-        })
-        .expect("Cannot load articles")
+    let result = solutions::table
+        .load::<Solution>(conn)
+        .expect("Failed to load solutions");
+
+    result
+        .into_iter()
+        .map(|solution| solution.attach())
+        .collect()
 }
 
 // pub fn find_one(conn: &PgConnection, slug: &str, user_id: Option<i32>) -> Option<ArticleJson> {

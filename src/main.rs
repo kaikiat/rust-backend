@@ -1,4 +1,5 @@
-extern crate rust_backend;
+use rust_backend;
+use rocket;
 
 #[rocket::main]
 async fn main() -> Result<(), rocket::Error> {
