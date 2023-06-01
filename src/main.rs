@@ -1,5 +1,5 @@
+use rocket::tokio;
 use rust_backend;
-// use rocket;
 // use rocket::{self, launch};
 
 // #[rocket::main]
@@ -19,3 +19,9 @@ use rust_backend;
 //     rust_backend::rocket()
 // }
   
+
+fn main() {
+    tokio::runtime::Runtime::new().unwrap().block_on(async {
+        let _ = rust_backend::rocket().launch().await;
+    });
+}
