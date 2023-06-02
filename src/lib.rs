@@ -2,26 +2,30 @@
 
 #[macro_use]
 extern crate rocket;
-use rocket::serde::json::{json, Value};
 
 #[macro_use]
 extern crate rocket_sync_db_pools;
 
-extern crate chrono;
+#[macro_use]
+extern crate diesel;
 
+#[macro_use]
+extern crate validator_derive;
+
+extern crate chrono;
 extern crate rocket_cors;
+
+use rocket::serde::json::{json, Value};
 use rocket::{Request, Response};
 use rocket::http::Header;
 use rocket::fairing::{Fairing, Info, Kind};
 
-#[macro_use]
-extern crate diesel;
 
 use dotenv::dotenv;
 
 mod config;
 mod database;
-// mod errors;
+mod errors;
 mod models;
 mod routes;
 mod schema;
@@ -57,8 +61,6 @@ impl Fairing for Cors {
     }
 }
 
-// routes::healthz::get_healthz,
-
 #[launch]
 pub fn rocket() -> _ {
     dotenv().ok();
@@ -67,6 +69,7 @@ pub fn rocket() -> _ {
             "/api",
             routes![
                 routes::solutions::get_solutions,
+                routes::solutions::post_solution,
             ],
         )
         .mount(

@@ -1,7 +1,5 @@
 use crate::config::DATE_FORMAT;
-// use diesel::sql_types::Date;
 use serde::Serialize;
-// use chrono::NaiveDateTime;
 use chrono::{NaiveDateTime, DateTime, Utc, NaiveDate, NaiveTime};
 
 #[derive(Queryable)]
@@ -14,8 +12,6 @@ pub struct Solution {
     pub modified_on: Option<NaiveDateTime>,
 }
 
-
-// pub const DATE_FORMAT: &'static str = "%Y-%m-%dT%H:%M:%S%.3fZ";
 
 fn convert_string_to_datetime(string: String) -> Result<DateTime<Utc>, chrono::ParseError> {
     if string.is_empty() {
@@ -49,12 +45,6 @@ impl Solution {
             title: self.title,
             description: if let Some(description) = self.description { description } else { String::new() },
             code: self.code,
-            // created_on: self.created_on.format(DATE_FORMAT).to_string(),
-            // modified_on: if let Some(modified_on) = self.modified_on {
-            //     modified_on.format(DATE_FORMAT).to_string()
-            // } else {
-            //     String::new()
-            // },
             created_on: created_on_datetime,
             modified_on: modified_on_datetime,
         }
@@ -67,8 +57,6 @@ pub struct SolutionJson {
     pub title: String,
     pub description: String,
     pub code: String,
-    // pub created_on: String,
-    // pub modified_on: String,
     pub created_on: DateTime<Utc>,
     pub modified_on: DateTime<Utc>,
 }
