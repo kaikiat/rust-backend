@@ -17,5 +17,5 @@
 
 
 ## Others
-1. Refer to [link](https://github.com/TatriX/realworld-rust-rocket)
-1. Refer to [link](https://github.com/navinkumarr/rust-realworld-example-app/tree/master/src)
+1. Refer to [realworld-rust-rocket](https://github.com/TatriX/realworld-rust-rocket)
+1. Refer to [rust-realworld-example-app](https://github.com/navinkumarr/rust-realworld-example-app/tree/master/src)
