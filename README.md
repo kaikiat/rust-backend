@@ -1,4 +1,4 @@
-# rust-backendgit
+# rust-backend
 ## Getting started
 1. Use diesel-cli for postgress setup [link](https://genekuo.medium.com/creating-a-rest-api-in-rust-with-persistence-rust-rocket-and-diesel-a4117d400104)
 2. `diesel setup --database-url=postgresql://localhost:5432/leetcode`
