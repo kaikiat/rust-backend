@@ -15,7 +15,6 @@
 4. sudo docker logs -f kaikiatpoh/rust-backend
 5. Further optimisation `DOCKER_BUILDKIT=0 docker buildx build --ulimit nofile=1024000:1024000 --platform linux/amd64 .`
 
-
 ## Others
 1. Refer to [realworld-rust-rocket](https://github.com/TatriX/realworld-rust-rocket)
 1. Refer to [rust-realworld-example-app](https://github.com/navinkumarr/rust-realworld-example-app/tree/master/src)
