@@ -6,7 +6,6 @@ use diesel::prelude::*;
 use chrono::{Local, NaiveDateTime};
 
 
-
 #[derive(Insertable)]
 #[table_name="solutions"]
 struct NewSolution<'a> {
