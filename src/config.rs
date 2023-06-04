@@ -10,7 +10,7 @@ pub const DATE_FORMAT: &'static str = "%Y-%m-%dT%H:%M:%S%.3fZ";
 /// Create rocket config from environment variables
 pub fn from_env() -> Figment {
     let port = env::var("PORT")
-        .unwrap_or_else(|_| "8000".to_string())
+        .unwrap_or_else(|_| "8080".to_string())
         .parse::<u16>()
         .expect("PORT environment variable should parse to an integer");
 

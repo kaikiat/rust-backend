@@ -21,7 +21,11 @@ WORKDIR /app
 COPY --from=builder /app/target/release/rust-backend /usr/local/bin
 
 RUN apt-get update && apt-get install -y libpq5
-ENV DATABASE_URL=postgresql://localhost:5432/leetcode
+
+ENV RUST_BACKTRACE=1
+ENV DATABASE_URL=postgresql://127.0.0.1:5432/leetcode
 ENV PORT=8080
+# ENV DATABASE_URL = postgresql://postgres:U9SjH_uy@localhost:5432/leetcode
+EXPOSE 8080
 
 ENTRYPOINT ["/usr/local/bin/rust-backend"]

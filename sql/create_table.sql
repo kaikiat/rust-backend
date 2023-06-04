@@ -1,3 +1,6 @@
+-- CREATE DATABASE leetcode;
+-- \connect leetcode;
+
 CREATE TABLE solutions   (
 	id serial PRIMARY KEY,
 	title VARCHAR ( 32 ) NOT NULL,
