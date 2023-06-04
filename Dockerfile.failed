@@ -1,0 +1,13 @@
+FROM rust:slim-bullseye
+
+ENV DATABASE_URL=postgresql://localhost:5432/leetcode
+ENV PORT=8080
+
+WORKDIR /app
+COPY . .
+
+# RUN cargo +nightly build --release -Z sparse-registry
+RUN rustup default nightly
+RUN cargo build
+
+CMD ["cargo", "run"]
