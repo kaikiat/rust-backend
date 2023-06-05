@@ -5,8 +5,10 @@
 3. `diesel migration generate create_solutions`
 4. `diesel migration run`
 5. `diesel print-schema > src/schema.rs` | `diesel print-schema > src/database/schema.rs`
-6. Connect to psql locally psql -h localhost -d $database_name -U $username or psql -h localhost -d leetcode
+6. Connect to psql locally psql -h localhost -d $database_name -U $username or psql -h localhost -d leetcode -U postgres
 7. Connect via `sudo -u postgres psql`
+8. curl http://54.169.58.242:8080/healthz
+
 
 ## Pipeline (Docker)
 1. docker build --platform linux/amd64 -t rust-backend .
@@ -15,7 +17,7 @@
 3. docker push kaikiatpoh/rust-backend
 4. sudo docker logs -f kaikiatpoh/rust-backend
 5. Run as container `sudo docker run -d --restart=always -p 8080:8080 kaikiatpoh/rust-backend:latest`
-6. Or run as `sudo docker run -d --network=host kaikiatpoh/rust-backend:latest`
+6. Or run as `sudo docker run -d --network=host -p 8080:8080 kaikiatpoh/rust-backend:latest`
 7. Further optimisation `DOCKER_BUILDKIT=0 docker buildx build --ulimit nofile=1024000:1024000 --platform linux/amd64 .`
 
 ## Pipeline (Docker-Compose)

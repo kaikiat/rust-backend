@@ -22,6 +22,7 @@ pub fn from_env() -> Figment {
     databases.insert("diesel_postgres_pool", database_config);
 
     Config::figment()
+        .merge(("address", "0.0.0.0"))
         .merge(("port", port))
         .merge(("databases", databases))
 }
