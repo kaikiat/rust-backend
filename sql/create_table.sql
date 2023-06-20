@@ -3,9 +3,9 @@
 
 CREATE TABLE solutions   (
 	id serial PRIMARY KEY,
-	title VARCHAR ( 32 ) NOT NULL,
+	title VARCHAR ( 128 ) NOT NULL,
 	description VARCHAR ( 128 ) NULL,
-	code VARCHAR ( 255 ) NOT NULL,
+	code TEXT NOT NULL,
 	created_on TIMESTAMP NOT NULL,
 	modified_on TIMESTAMP NULL
 );

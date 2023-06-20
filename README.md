@@ -2,9 +2,10 @@
 ## Getting started
 1. Use diesel-cli for postgress setup [link](https://genekuo.medium.com/creating-a-rest-api-in-rust-with-persistence-rust-rocket-and-diesel-a4117d400104)
 2. `diesel setup --database-url=postgresql://localhost:5432/leetcode`
-3. `diesel migration generate create_solutions`
+3. `diesel migration generate <NAME_OF_MIGRATION>`
 4. `diesel migration run`
-5. `diesel print-schema > src/schema.rs` | `diesel print-schema > src/database/schema.rs`
+4. `diesel migration reod` if errors
+5. `diesel print-schema > src/schema.rs`
 6. Connect to psql locally psql -h localhost -d $database_name -U $username or psql -h localhost -d leetcode -U postgres
 7. Connect via `sudo -u postgres psql`
 8. curl http://54.169.58.242:8080/healthz
@@ -17,14 +18,8 @@
 3. docker push kaikiatpoh/rust-backend
 4. sudo docker logs -f kaikiatpoh/rust-backend
 5. Run as container `sudo docker run -d --restart=always -p 8080:8080 kaikiatpoh/rust-backend:latest`
-6. Or run as `sudo docker run -d --network=host -p 8080:8080 kaikiatpoh/rust-backend:latest`
+6. Or run as `sudo docker run -d --network=host kaikiatpoh/rust-backend:latest`
 7. Further optimisation `DOCKER_BUILDKIT=0 docker buildx build --ulimit nofile=1024000:1024000 --platform linux/amd64 .`
-
-## Pipeline (Docker-Compose)
-1. docker-compose up
-2. docker-compose build
-3. docker tag rust-backend kaikiatpoh/rust-backend:latest
-4. docker push kaikiatpoh/rust-backend:latest
 
 ## Others
 1. Refer to [realworld-rust-rocket](https://github.com/TatriX/realworld-rust-rocket)
