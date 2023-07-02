@@ -45,20 +45,22 @@ pub struct Cors;
 impl Fairing for Cors {
     fn info(&self) -> Info {
         Info {
-            name: "Cross-Origin-Resource-Sharing Fairing",
-            kind: Kind::Response,
+            name: "Add CORS headers to responses",
+            kind: Kind::Response
         }
     }
 
     async fn on_response<'r>(&self, _request: &'r Request<'_>, response: &mut Response<'r>) {
         response.set_header(Header::new("Access-Control-Allow-Origin", "*"));
-        response.set_header(Header::new(
-            "Access-Control-Allow-Methods",
-            "POST, PATCH, PUT, DELETE, HEAD, OPTIONS, GET",
-        ));
+        response.set_header(Header::new("Access-Control-Allow-Methods", "POST, GET, PATCH, OPTIONS"));
         response.set_header(Header::new("Access-Control-Allow-Headers", "*"));
         response.set_header(Header::new("Access-Control-Allow-Credentials", "true"));
     }
+}
+
+#[options("/<_..>")]
+fn all_options() {
+    /* Intentionally left empty */
 }
 
 #[launch]
@@ -66,16 +68,17 @@ pub fn rocket() -> _ {
     dotenv().ok();
     rocket::custom(config::from_env())
         .mount(
+            "/",
+            routes![
+                routes::healthz::get_healthz,
+                all_options
+            ],
+        )
+        .mount(
             "/api",
             routes![
                 routes::solutions::get_solutions,
                 routes::solutions::post_solution,
-            ],
-        )
-        .mount(
-            "/",
-            routes![
-                routes::healthz::get_healthz,
             ],
         )
         .attach(database::Db::fairing())
