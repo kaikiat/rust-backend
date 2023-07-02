@@ -21,6 +21,16 @@
 6. Or run as `sudo docker run -d --network=host kaikiatpoh/rust-backend:latest`
 7. Further optimisation `DOCKER_BUILDKIT=0 docker buildx build --ulimit nofile=1024000:1024000 --platform linux/amd64 .`
 
+## Database
+1. Migraion. Use command below
+```
+pg_dump -d -t solutions -U postgres leetcode > leetcode.sql
+```
+2. Next use this tool to convert to INSERT statement
+```
+cat leetcode.sql | pg-dump2insert
+```
+
 ## Others
 1. Refer to [realworld-rust-rocket](https://github.com/TatriX/realworld-rust-rocket)
 1. Refer to [rust-realworld-example-app](https://github.com/navinkumarr/rust-realworld-example-app/tree/master/src)

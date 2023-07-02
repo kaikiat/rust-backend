@@ -60,7 +60,6 @@ impl Fairing for Cors {
 
 #[options("/<_..>")]
 fn all_options() {
-    /* Intentionally left empty */
 }
 
 #[launch]

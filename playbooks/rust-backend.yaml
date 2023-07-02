@@ -1,0 +1,22 @@
+- name: Run docker image
+  hosts: ec2
+  become: true
+  tasks:
+    - name: Remove existing image
+      docker_image:
+        name: kaikiatpoh/rust-backend
+        tag: latest
+        state: absent 
+    - name: Pull Docker image
+      docker_image:
+        name: kaikiatpoh/rust-backend
+        tag: latest
+        # force_source: true
+        source: pull
+    - name: Run Docker container
+      docker_container:
+        name: rust-backend
+        image: kaikiatpoh/rust-backend:latest
+        detach: yes
+        network_mode: host
+
