@@ -7,7 +7,7 @@ use chrono::{Local, NaiveDateTime};
 
 
 #[derive(Insertable)]
-#[table_name="solutions"]
+#[diesel(table_name = solutions)]
 struct NewSolution<'a> {
     title: &'a str,
     description: Option<&'a str>,
