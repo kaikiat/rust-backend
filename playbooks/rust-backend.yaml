@@ -11,7 +11,7 @@
       docker_image:
         name: kaikiatpoh/rust-backend
         tag: latest
-        # force_source: true
+        force_source: true
         source: pull
     - name: Run Docker container
       docker_container:
