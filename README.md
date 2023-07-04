@@ -13,7 +13,7 @@
 
 ## Pipeline (Docker)
 1. docker build --platform linux/amd64 -t rust-backend .
-1. docker image build --platform linux/amd64 -t rust-backend -f . 
+1. docker image build --platform linux/amd64 -t rust-backend -f Dockerfile . 
 2. Tag if not tagged docker tag rust-backend kaikiatpoh/rust-backend
 3. docker push kaikiatpoh/rust-backend
 4. sudo docker logs -f kaikiatpoh/rust-backend
@@ -21,6 +21,8 @@
 6. Or run as `sudo docker run -d --network=host kaikiatpoh/rust-backend:latest`
 7. Further optimisation `DOCKER_BUILDKIT=0 docker buildx build --ulimit nofile=1024000:1024000 --platform linux/amd64 .`
 
+## Deployment
+1. Run `cargo build --bin rust-backend`
 ## Database
 1. Migraion. Use command below
 ```

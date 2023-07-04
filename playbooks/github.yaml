@@ -1,0 +1,41 @@
+- name: Clone Repository if Not Exists
+  hosts: ec2
+  become: true
+  tasks:
+    - name: Check if destination directory exists
+      stat:
+        path: home/ubuntu/rust-backend
+      register: dest_dir
+    - name: Clone repository
+      git:
+        repo: https://git-codecommit.ap-southeast-1.amazonaws.com/v1/repos/rust-backend 
+        dest: /home/ubuntu/rust-backend
+        version: main
+      when: not dest_dir.stat.exists
+    - name: Pull latest changes
+      git:
+        repo: https://git-codecommit.ap-southeast-1.amazonaws.com/v1/repos/rust-backend 
+        dest: /home/ubuntu/rust-backend
+        version: main
+        force: yes
+      when: not dest_dir.stat.exists
+- name: Setup rust
+  hosts: ec2
+  become: true
+  tasks:
+    # - name: Uninstall Rust
+    #   apt:
+    #     name: rustc
+    #     state: absent
+    # - name: Install rustup - Might have to do manually ...
+    #   shell:
+    #     cmd: |
+    #       curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    #       source $HOME/.cargo/env
+    #       $HOME/.cargo/bin/rustup default nightly
+    - name: Run project
+      shell:
+        cmd: |
+          cd /home/ubuntu/rust-backend
+          sudo chown -R ubuntu:ubuntu .
+          /usr/bin/cargo run
