@@ -4,7 +4,7 @@
 2. `diesel setup --database-url=postgresql://localhost:5432/leetcode`
 3. `diesel migration generate <NAME_OF_MIGRATION>`
 4. `diesel migration run`
-4. `diesel migration reod` if errors
+4. `diesel migration redo` if errors
 5. `diesel print-schema > src/schema.rs`
 6. Connect to psql locally psql -h localhost -d $database_name -U $username or psql -h localhost -d leetcode -U postgres
 7. Connect via `sudo -u postgres psql`
